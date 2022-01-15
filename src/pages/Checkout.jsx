@@ -2,8 +2,8 @@ import React from 'react';
 import { Typography, Box, Container, Grid } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 
-import { Logo } from '../components/Logo';
-import { PaymentMethod } from '../components/PaymentMethod';
+import Logo from '../components/Logo';
+import Selector from '../components/Selector';
 
 const useStyles = makeStyles({
     root: {
@@ -27,7 +27,7 @@ const Checkout = () => {
                 <Grid item xs={6} className={classes.paymentGrid}>
                     <Logo />
                     <Container maxWidth='md'>
-                        <PaymentMethod />
+                        <Selector />
                     </Container>
                 </Grid>
                 <Grid item xs={6}>
