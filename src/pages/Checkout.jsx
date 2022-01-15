@@ -1,36 +1,36 @@
 import React from 'react';
 import { Typography, Box, Container, Grid } from '@mui/material';
-import { makeStyles } from '@mui/styles';
 
 import Logo from '../components/Logo';
 import Selector from '../components/Selector';
-
-const useStyles = makeStyles({
-    root: {
-        padding: '1rem',
-    },
-    paymentGrid: {
-        backgroundColor: '#fafafa',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-    }
-});
+import Table from '../components/BasicTable';
 
 const Checkout = () => {
-    const classes = useStyles();
 
     return (
-        <Container maxWidth='xl' className={classes.root}>
-            <Grid container sx={{ backgroundColor: 'blue' }}>
-                <Grid item xs={6} className={classes.paymentGrid}>
-                    <Logo />
-                    <Box style={{ padding: '1rem' }}>
+        <Container maxWidth='xl' sx={{ p: '1rem' }}>
+            <Grid container sx={{ backgroundColor: 'gray' }}>
+                <Grid item xs={6} sx={{ backgroundColor: '#fafafa' }}>
+                    <Box sx={{
+                        p: '1rem',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                    }}>
+                        <Logo />
+                    </Box>
+                    <Box sx={{ p: '1rem' }}>
                         <Typography variant='h5'>
                             <strong>Payment Method</strong>
                         </Typography>
                         <Selector />
+                    </Box>
+                    <Box sx={{ p: '1rem' }}>
+                        <Typography variant='h5'>
+                            <strong>Payment Details</strong>
+                        </Typography>
+                        <Table />
                     </Box>
                 </Grid>
                 <Grid item xs={6}>
