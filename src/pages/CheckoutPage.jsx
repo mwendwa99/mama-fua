@@ -9,6 +9,8 @@ import CheckoutForm from '../components/CheckoutForm';
 
 import Logo from '../components/Logo';
 import Selector from '../components/Selector';
+import BasicTable from '../components/BasicTable';
+import SummaryHeader from '../components/SummaryHeader';
 
 // Make sure to call `loadStripe` outside of a component’s render to avoid
 // recreating the `Stripe` object on every render.
@@ -22,9 +24,9 @@ const Checkout = () => {
 
 
     return (
-        <Container maxWidth='xl' sx={{ p: '1rem' }}>
-            <Grid container sx={{ backgroundColor: 'gray' }}>
-                <Grid item xs={6} sx={{ backgroundColor: '#fafafa' }}>
+        <Container maxWidth='xl' sx={{ p: '2rem' }}>
+            <Grid container>
+                <Grid item xs={8} sx={{ backgroundColor: '#fafafa', p: '1rem' }}>
                     <Box sx={{
                         p: '1rem',
                         display: 'flex',
@@ -49,9 +51,10 @@ const Checkout = () => {
                         </Elements>
                     </Box>
                 </Grid>
-                <Grid item xs={6}>
-                    <Container maxWidth='md' sx={{ backgroundColor: 'pink' }}>
-                        <Logo />
+                <Grid item xs={4} sx={{ backgroundColor: '#EAC7A3', p: '1rem' }}>
+                    <SummaryHeader title='Booking Summary' />
+                    <Container maxWidth='md'>
+                        <BasicTable />
                     </Container>
                 </Grid>
             </Grid>
