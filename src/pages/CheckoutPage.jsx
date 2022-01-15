@@ -53,7 +53,7 @@ const Checkout = () => {
                 </Grid>
                 <Grid item xs={4} sx={{ backgroundColor: '#EAC7A3', p: '1rem' }}>
                     <SummaryHeader title='Booking Summary' />
-                    <Container maxWidth='md'>
+                    <Container maxWidth='sx'>
                         <BasicTable />
                     </Container>
                 </Grid>
