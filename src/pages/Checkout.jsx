@@ -1,11 +1,13 @@
 import React from 'react';
-import { Typography } from '@mui/material';
+import { Typography, Box } from '@mui/material';
+
+import { Logo } from '../components/Logo';
 
 const Checkout = () => {
     return (
-        <div>
-            <Typography variant="h1">Checkout</Typography>
-        </div>
+        <Box>
+            <Logo />
+        </Box>
     )
 }
 
