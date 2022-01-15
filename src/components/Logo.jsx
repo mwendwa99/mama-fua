@@ -1,5 +1,5 @@
 import React from 'react';
-import { Fab, Typography, Box, Grid } from '@mui/material';
+import { IconButton, Typography, Box, Grid } from '@mui/material';
 
 import assets from '../assets';
 
@@ -9,9 +9,9 @@ const Logo = () => {
             <Grid container>
                 <Grid item xs={12}>
                     <Typography variant="h1">
-                        <Fab fontSize='medium'>
-                            <img src={assets.logo} alt='mama-fua-logo' />
-                        </Fab>
+                        <IconButton fontSize='medium'>
+                            <img src={assets.logo} width='100%' height='100%' alt='mama-fua-logo' />
+                        </IconButton>
                     </Typography>
                 </Grid>
             </Grid>
