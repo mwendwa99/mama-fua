@@ -22,13 +22,16 @@ const Checkout = () => {
     const classes = useStyles();
 
     return (
-        <Box className={classes.root}>
+        <Container maxWidth='xl' className={classes.root}>
             <Grid container sx={{ backgroundColor: 'blue' }}>
                 <Grid item xs={6} className={classes.paymentGrid}>
                     <Logo />
-                    <Container maxWidth='md'>
+                    <Box style={{ padding: '1rem' }}>
+                        <Typography variant='h5'>
+                            <strong>Payment Method</strong>
+                        </Typography>
                         <Selector />
-                    </Container>
+                    </Box>
                 </Grid>
                 <Grid item xs={6}>
                     <Container maxWidth='md' sx={{ backgroundColor: 'pink' }}>
@@ -36,7 +39,7 @@ const Checkout = () => {
                     </Container>
                 </Grid>
             </Grid>
-        </Box>
+        </Container>
     )
 }
 
