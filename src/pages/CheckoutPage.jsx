@@ -1,11 +1,25 @@
 import React from 'react';
 import { Typography, Box, Container, Grid } from '@mui/material';
 
+// stripe imports
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
+import CheckoutForm from '../components/CheckoutForm';
+
+
 import Logo from '../components/Logo';
 import Selector from '../components/Selector';
-import Table from '../components/BasicTable';
+
+// Make sure to call `loadStripe` outside of a component’s render to avoid
+// recreating the `Stripe` object on every render.
+const stripePromise = loadStripe('pk_test_qblFNYngBkEdjEZ16jxxoWSM');
 
 const Checkout = () => {
+    const options = {
+        // passing the client secret obtained from the server
+        clientSecret: '{{CLIENT_SECRET}}',
+    };
+
 
     return (
         <Container maxWidth='xl' sx={{ p: '1rem' }}>
@@ -30,7 +44,9 @@ const Checkout = () => {
                         <Typography variant='h5'>
                             <strong>Payment Details</strong>
                         </Typography>
-                        <Table />
+                        <Elements stripe={stripePromise} options={options}>
+                            <CheckoutForm />
+                        </Elements>
                     </Box>
                 </Grid>
                 <Grid item xs={6}>
