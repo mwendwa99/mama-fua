@@ -66,6 +66,7 @@ export default function BasicTable() {
                             </TableCell>
 
                         </TableRow>
+                        <Divider />
                         <TableRow>
                             {/* add total */}
                             <TableCell>
