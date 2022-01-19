@@ -1,10 +1,13 @@
 import React from 'react';
 import { Typography, Box, Container, Grid } from '@mui/material';
+import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 // stripe imports
-import { Elements } from '@stripe/react-stripe-js';
-import { loadStripe } from '@stripe/stripe-js';
-import CheckoutForm from '../components/CheckoutForm';
+import StripeCheckout from 'react-stripe-checkout';
+import STRIPE_PUBLISHABLE from '../constants/stripe';
+import PAYMENT_SERVER_URL from '../constants/server';
 
 
 import Logo from '../components/Logo';
@@ -12,18 +15,40 @@ import Selector from '../components/Selector';
 import BasicTable from '../components/BasicTable';
 import SummaryHeader from '../components/SummaryHeader';
 
-// Make sure to call `loadStripe` outside of a component’s render to avoid
-// recreating the `Stripe` object on every render.
-// const stripePromise = loadStripe('pk_test_qblFNYngBkEdjEZ16jxxoWSM');
-const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
+const CURRENCY = 'USD';
 
-const options = {
-    // passing the client secret obtained from the server
-    // clientSecret: '{{CLIENT_SECRET}}',
-    clientSecret: process.env.REACT_APP_STRIPE_CLIENT_SECRET,
+const fromDollarToCent = amount => amount * 100;
+
+// send notification on successful payment
+const notifySuccess = (message) => {
+    toast.success(message, {
+        position: toast.POSITION.TOP_CENTER
+    });
 };
 
-const Checkout = ({ children }) => {
+// send notification ON ERROR
+const notifyError = (message) => {
+    toast.error(message, {
+        position: toast.POSITION.TOP_CENTER
+    });
+};
+
+const onToken = (amount, description) => token =>
+    axios.post(PAYMENT_SERVER_URL,
+        {
+            description,
+            source: token.id,
+            currency: CURRENCY,
+            amount: fromDollarToCent(amount) //converts to cents
+        })
+        .then(({ data }) => {
+            notifySuccess('Payment successful');
+        })
+        .catch(({ response }) => {
+            notifyError(response.data.error.message);
+        });
+
+const Checkout = ({ name, description, amount }) => {
 
     return (
         <Container maxWidth='xl' sx={{ p: '2rem' }}>
@@ -48,9 +73,17 @@ const Checkout = ({ children }) => {
                         <Typography variant='h5'>
                             <strong>Payment Details</strong>
                         </Typography>
-                        <Elements stripe={stripePromise} options={options}>
-                            {children}
-                        </Elements>
+                        <StripeCheckout
+                            name={name}
+                            description={description}
+                            amount={fromDollarToCent(amount)}
+                            token={onToken(amount, description)}
+                            currency={CURRENCY}
+                            stripeKey={STRIPE_PUBLISHABLE}
+                            zipCode
+                            email
+                            allowRememberMe
+                        />
                     </Box>
                 </Grid>
                 <Grid item xs={4} sx={{ backgroundColor: '#EAC7A3', p: '1rem' }}>

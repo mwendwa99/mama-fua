@@ -5,7 +5,11 @@ function App() {
 
   return (
     <div className="App">
-      <Checkout />
+      <Checkout
+        name='test'
+        description='you sold test items'
+        amount={4.99}
+      />
     </div>
   );
 }
