@@ -48,10 +48,11 @@ const onToken = (amount, description) => token =>
             notifyError(response.data.error.message);
         });
 
-const Checkout = ({ name, description, amount }) => {
+const CheckoutPage = ({ name, description, amount }) => {
 
     return (
         <Container maxWidth='xl' sx={{ p: '2rem' }}>
+            <ToastContainer />
             <Grid container>
                 <Grid item xs={8} sx={{ backgroundColor: '#f5f5f5', p: '1rem' }}>
                     <Box sx={{
@@ -97,4 +98,4 @@ const Checkout = ({ name, description, amount }) => {
     )
 }
 
-export default Checkout;
+export default CheckoutPage;
