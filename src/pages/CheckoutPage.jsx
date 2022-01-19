@@ -14,19 +14,21 @@ import SummaryHeader from '../components/SummaryHeader';
 
 // Make sure to call `loadStripe` outside of a component’s render to avoid
 // recreating the `Stripe` object on every render.
-const stripePromise = loadStripe('pk_test_qblFNYngBkEdjEZ16jxxoWSM');
+// const stripePromise = loadStripe('pk_test_qblFNYngBkEdjEZ16jxxoWSM');
+const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
 
-const Checkout = () => {
-    const options = {
-        // passing the client secret obtained from the server
-        clientSecret: '{{CLIENT_SECRET}}',
-    };
+const options = {
+    // passing the client secret obtained from the server
+    // clientSecret: '{{CLIENT_SECRET}}',
+    clientSecret: process.env.REACT_APP_STRIPE_CLIENT_SECRET,
+};
 
+const Checkout = ({ children }) => {
 
     return (
         <Container maxWidth='xl' sx={{ p: '2rem' }}>
             <Grid container>
-                <Grid item xs={8} sx={{ backgroundColor: '#fafafa', p: '1rem' }}>
+                <Grid item xs={8} sx={{ backgroundColor: '#f5f5f5', p: '1rem' }}>
                     <Box sx={{
                         p: '1rem',
                         display: 'flex',
@@ -47,7 +49,7 @@ const Checkout = () => {
                             <strong>Payment Details</strong>
                         </Typography>
                         <Elements stripe={stripePromise} options={options}>
-                            <CheckoutForm />
+                            {children}
                         </Elements>
                     </Box>
                 </Grid>
