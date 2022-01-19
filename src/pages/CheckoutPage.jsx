@@ -6,7 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 // stripe imports
 import StripeCheckout from 'react-stripe-checkout';
-import STRIPE_PUBLISHABLE from '../constants/stripe';
+import { STRIPE_PUBLISHABLE } from '../constants/stripe';
 import PAYMENT_SERVER_URL from '../constants/server';
 
 
@@ -49,7 +49,6 @@ const onToken = (amount, description) => token =>
         });
 
 const CheckoutPage = ({ name, description, amount }) => {
-
     return (
         <Container maxWidth='xl' sx={{ p: '2rem' }}>
             <ToastContainer />
